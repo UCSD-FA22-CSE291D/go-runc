@@ -515,6 +515,7 @@ func PreDump(args []string) []string {
 
 // Checkpoint allows you to checkpoint a container using criu
 func (r *Runc) Checkpoint(context context.Context, id string, opts *CheckpointOpts, actions ...CheckpointAction) error {
+	fmt.Println("\n\nRunc checkpoint called.\n\n")
 	args := []string{"checkpoint"}
 	extraFiles := []*os.File{}
 	if opts != nil {
@@ -532,6 +533,7 @@ func (r *Runc) Checkpoint(context context.Context, id string, opts *CheckpointOp
 	}
 	cmd := r.command(context, append(args, id)...)
 	cmd.ExtraFiles = extraFiles
+	fmt.Println("\n\nRunc checkpoint done.\n\n")
 	return r.runOrError(cmd)
 }
 
